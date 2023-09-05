@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post list</title>
+</head>
+<body>
+<style>
+    a {
+      text-decoration: none;
+    }
+    a :hover {
+        font-size: 25px;
+    }
+</style>
+<!--    {{ items }}-->
+    <div style="text-align: center">
+        <p style="font-size: 45px"> Teach my skills </p>
+    </div>
+    <div style="margin-left: 30px; margin-bottom: 20px  ">
+        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_new' %}">
+            Create new post </a>
+    </div>
+        {% for post in items %}
+    <div style="margin: 15px; display: inline-block">
+        <div style="border: 1px solid">
+            <div style="margin: 15px; text-align: center" >
+               <a href="{% url 'post_detail' post_pk=post.pk %}"> {{ post.title }} </a>
+            </div>
+            <div style="border: 1px solid">{{ post.created_date }}</div>
+        </div>
+    </div>
+        {% endfor %}
+</body>
+</html>
