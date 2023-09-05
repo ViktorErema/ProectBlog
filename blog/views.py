@@ -44,3 +44,7 @@ def post_edit(request, post_pk):
             post.save()
             return redirect('post_detail', post_pk=post.pk)
 
+
+def post_delete(request, post_pk):
+    post = get_object_or_404(Post, pk=post_pk).delete()
+    return redirect('post_list')

@@ -26,6 +26,10 @@
         <a style="font-size: 20px; margin: 20px; margin-right: 20px; color: #580000; border: 1px solid; border-radius: 35px; padding: 5px "
            href="{% url 'post_edit' post_pk=post.pk %}"> Edit
         </a>
+
+        <a style="font-size: 20px; margin: 20px; margin-right: 20px; color: #580000; border: 1px solid; border-radius: 35px; padding: 5px "
+           href="{% url 'post_delete' post_pk=post.pk %}"> Delete
+        </a>
     </div>
 
     <div style="">
