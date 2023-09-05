@@ -20,6 +20,10 @@
     <div style="margin-left: 30px; margin-bottom: 20px  ">
         <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_new' %}">
             Create new post </a>
+        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_list' %}">
+            Опубликованные посты </a>
+        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_status' %}">
+            Не опубликованные посты </a>
     </div>
         {% for post in items %}
     <div style="margin: 15px; display: inline-block">

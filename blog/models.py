@@ -3,8 +3,9 @@ from django.db import models
 class Post(models.Model):
     title = models.CharField(max_length=100, verbose_name='Тема')
     text = models.TextField(verbose_name='Текст')
-    created_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True)
+    created_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True, )
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
+    status_published_post = models.BooleanField(default=False)
 
 
     def __str__(self):
