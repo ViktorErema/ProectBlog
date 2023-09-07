@@ -1,42 +1,213 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Post list</title>
+    <meta name="viewport" content="device-width, initial-scale=1">
+    <title>Blog</title>
+    <style>
+        *{
+            margin: 0;
+        }
+        .blog {
+            min-width: 100%;
+            background-color: #191919;
+            margin: 0;
+            overflow-x: hidden;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .blog_fonts {
+            font-family: 'DM Sans', 'Georgia', 'Arial', 'sans-serif';
+            font-style: normal;
+            font-size: 20px;
+            font-weight: 400;
+            line-height: 22px;
+            color: #ffffff;
+        }
+        .container__width {
+            width: 1440px;
+        }
+        .container__padding {
+            padding: 0 240px;
+        }
+        .container__block-padding {
+            margin-bottom: 40px;
+        }
+        .header {
+            width: 100%;
+        }
+        .nav {
+            height: 30px;
+            background-color: black;
+            text-align: center;
+            font-size: 16px;
+            color: rgb(43, 43, 43);
+        }
+        .page-nav {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: flex-end;
+            
+            width: 100%;
+            height: 90px;
+        }
+        .page-header {
+            font-weight: 400;
+            font-size: 54px;
+        }
+        .page-nav_buttons {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 650px;
+        }
+        .search {
+            width: 500px;
+            background-color: #6A7577;
+            border-radius: 30px;
+            height: 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        .search_input {
+            width: 300px;
+            height: 40px;
+            background-color: #6A7577;
+            color:#ffffff;
+            text-decoration: none;
+            border: none;
+        }
+        .search_input:focus {
+            outline: none;
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #118DA8;
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            padding: 0 15px;
+            height: 50px;
+        }
+        .button__search {
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+            width: 110px;
+            height: 40px;
+        }
+        .view-post {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .button__publish {
+            background-color: #6A7577;
+        }
+        .button__publish:focus, 
+        .button__publish:active, 
+        .button__publish:hover {
+            background-color: #118DA8;
+        }
+        .blog-post {
+            max-width: 980px;
+            max-height: 480px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            background-color: black;
+            border-radius: 30px;
+        }
+        .post-image {
+            width: 280px;
+            height: 440px;
+        }
+        .post-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: space-evenly;
+            width: 600px;
+            height: 440px;
+            background-color: black;
+            margin: 0;
+        }
+        .post-date {
+            background-color: #191919;
+            border-radius: 15px;
+            height: 30px;
+            padding: 5px 10px;
+        }
+        .post-hashtag {
+            color: #118DA8;
+            height: 30px;
+        }
+        .post-title {
+            font-weight: 400;
+            font-size: 38px;
+            line-height: 36px;
+        }
+        .post-text {
+            max-height: 130px;
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body>
-<style>
-    a {
-      text-decoration: none;
-    }
-    a :hover {
-        font-size: 25px;
-    }
-</style>
-<!--    {{ items }}-->
-    <div style="text-align: center">
-        <p style="font-size: 45px"> Teach my skills </p>
-    </div>
-    <div style="margin-left: 30px; margin-bottom: 20px  ">
-        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_new' %}">
-            Create new post </a>
-        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_list' %}">
-            Опубликованные посты </a>
-        <a style="font-size: 20px; color: #1e8a28; border: 1px solid; border-radius: 25px; padding: 5px " href="{% url 'post_status' %}">
-            Не опубликованные посты </a>
-    </div>
-        {% for post in items %}
-    <div style="margin: 15px; display: inline-block">
-        <div style="border: 1px solid">
-            <div style="margin: 15px; text-align: center" >
-               <a href="{% url 'post_detail' post_pk=post.pk %}"> {{ post.title }} </a>
+<body class="blog blog_fonts">
+    <!--Шапка на будущее-->
+    <header class="header container__padding">
+        <nav class="nav">Тут будут другие кнопки</nav>
+    </header>
+    <!--Посты и прочее-->
+    <main class="main container__width container__padding">
+        <!--Поиск и создание нового поста-->
+        <section class="page-nav container__block-padding">
+            <h1 class="page-header">Teach my skills</h1>
+            <div class="page-nav_buttons">
+                <div class="search">
+                    <input type="text" class="search_input" placeholder="Найти пост">
+                    <a class="button button__search" href="#search">
+                        <div class="search_button-text">Поиск</div>
+                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.3779 18.6996L14.5681 12.8897C15.67 11.5293 16.3334 9.79975 16.3334 7.9167C16.3334 3.55145 12.7819 0 8.41666 0C4.05141 0 0.5 3.55145 0.5 7.9167C0.5 12.2819 4.05145 15.8334 8.4167 15.8334C10.2997 15.8334 12.0293 15.17 13.3897 14.0681L19.1996 19.878C19.3623 20.0407 19.6261 20.0407 19.7889 19.878L20.378 19.2888C20.5407 19.1261 20.5407 18.8623 20.3779 18.6996ZM8.4167 14.1667C4.97024 14.1667 2.16668 11.3631 2.16668 7.9167C2.16668 4.47024 4.97024 1.66668 8.4167 1.66668C11.8631 1.66668 14.6667 4.47024 14.6667 7.9167C14.6667 11.3631 11.8631 14.1667 8.4167 14.1667Z" fill="white"/>
+                        </svg>
+                    </a>
+                </div>
+                <a href="{% url 'post_new' %}" class="button button__new-post">Новый пост</a>
             </div>
-            <div style="margin-top: 25px; text-align: center" >
-                {{ post.text }}
-              </div>
-            <div style="border: 1px solid">{{ post.created_date }}</div>
-        </div>
-    </div>
+        </section>
+    <!--Кнопки с Видимостью постов-->
+        <section class="view-post container__block-padding">
+            <a href="{% url 'post_list' %}" class="button button__publish">Опубликованные</a>
+            <a href="{% url 'post_status' %}" class="button button__publish">Не опубликованные</a>
+        </section>
+        {% for post in items %}
+        <!--Отображение поста-->
+        <section class="blog-post container__block-padding">
+            <!--Изображение-->
+            <img src="../../../source/img/Frame.png" alt="изображение" class="post-image">
+            <div class="post-content">
+                <!--Переменная с датой-->
+                    <div class="post-date">{{ post.created_date }}</div>
+                    <p class="post-hashtag">#хештег</p>
+                    <!--Заголовок, текст и кнопка перехода-->
+                    <h2 class="post-title">{{ post.title }}</h2>
+                    <p class="post-text">{{ post.text }}</p>
+                    <a href="{% url 'post_detail' post_pk=post.pk %}" class="button button_open-post">Смотреть полностью</a>
+            </div>
+        </section>
         {% endfor %}
+    </main>
 </body>
 </html>
