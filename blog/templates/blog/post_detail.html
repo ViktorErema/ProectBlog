@@ -50,11 +50,17 @@
 
         </div>
     </div>
-<div style="margin-top: 25px; text-align: center" >
-        {% for i in comments %}
+<br style="margin-top: 25px; text-align: left" >
+        <h2>Комментарии : {{ kol_comments }} </h2>
+
+        {%for i in comments%}
+           <br> {{ i.author }}
+            {{ i.publish_date }}
             {{ i }}
+           </br>
         {% endfor %}
 </div>
+
 
 </body>
 </html>

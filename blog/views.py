@@ -29,8 +29,13 @@ def published_post(request, post_pk):
 
 def post_detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
-    comments = Comments.objects.filter(pk=post_pk)
-    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
+    comments = Comments.objects.filter(post=post_pk)
+    kol_comments = comments.count()
+    return render(request, 'blog/post_detail.html', {
+                                                    'post': post,
+                                                     'comments': comments,
+                                                     'kol_comments': kol_comments
+                                                                        })
 
 def post_new(request):
     if request.method == 'GET':

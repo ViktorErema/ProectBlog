@@ -6,6 +6,7 @@ class Post(models.Model):
     created_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True, )
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
     status_published_post = models.BooleanField(default=False, verbose_name='Статус поста')
+    сategory = models.CharField(max_length=100, verbose_name='Категория')
 
 
     def __str__(self):
@@ -17,6 +18,8 @@ class Comments(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     text = models.TextField(verbose_name='Текст')
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
+    author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+
 
 
     def __str__(self):
