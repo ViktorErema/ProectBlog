@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from blog.models import Post
+from blog.models import Post, Comments
 from blog.forms import PostForm
 
 def post_list(request):
@@ -11,14 +11,26 @@ def post_list(request):
     return render(request, 'blog/post_list.html', context)
 
 def post_status(request):
+    #Функция отвечающая за добавление поста в режим "неопубликованные"
     posts = Post.objects.all().filter(status_published_post=False)
     context = {'items': posts}
     return render(request, 'blog/post_list.html', context)
 
-def post_detail(request, post_pk):
+def published_post(request, post_pk):
+    #Функция которая отвечает за выход поста из "неопубликованные" в "опубликованные"
     post = Post.objects.get(pk=post_pk)
+    post.status_published_post = True
+    post.save()
     context = {'post': post}
     return render(request, 'blog/post_detail.html', context)
+
+
+
+
+def post_detail(request, post_pk):
+    post = Post.objects.get(pk=post_pk)
+    comments = Comments.objects.filter(pk=post_pk)
+    return render(request, 'blog/post_detail.html', {'post': post, 'comments': comments})
 
 def post_new(request):
     if request.method == 'GET':
