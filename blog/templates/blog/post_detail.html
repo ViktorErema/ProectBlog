@@ -59,11 +59,24 @@
         <br style="margin-top: 25px; text-align: left" >
         <h2>Комментарии : {{ kol_comments }} </h2>
 
+    </form>
+    <form action="" method="POST">{% csrf_token %}
+
+    {{ comment_form.as_p }}
+    <input type="submit" value="Create"; style="margin-left: 50px" >
+     </form>
+
+
+    </form>
+    <div>
         {%for i in comments%}
-           <br> {{ i.author }}
+            {{ i.author }}
             {{ i.publish_date }}
             {{ i }}
-           </br>
+           {% if user.id == i.author.id %}
+                     {% endif %}
+
+
         {% endfor %}
     </div>
 
