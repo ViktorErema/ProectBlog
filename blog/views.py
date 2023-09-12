@@ -3,7 +3,7 @@ from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from blog.models import Post, Comments, Category
-from blog.forms import PostForm
+from blog.forms import PostForm, CommentForm
 
 def post_list(request):
     posts = Post.objects.all().filter(status_published_post=True)
@@ -43,10 +43,23 @@ def post_detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     comments = Comments.objects.filter(post=post_pk)
     kol_comments = comments.count()
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.author = request.user
+            comment.post = post
+            comment.published_date = datetime.now()
+            comment.save()
+            return redirect('post_detail', post_pk=post_pk)
+    else:
+        comment_form = CommentForm()
+
     return render(request, 'blog/post_detail.html', {
                                                     'post': post,
                                                      'comments': comments,
-                                                     'kol_comments': kol_comments
+                                                     'kol_comments': kol_comments,
+                                                     'comment_form': comment_form
                                                                         })
 
 def post_new(request):
