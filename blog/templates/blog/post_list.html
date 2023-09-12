@@ -182,58 +182,64 @@
     </style>
 </head>
 <body class="blog blog_fonts">
-    <!--Шапка на будущее-->
-    <header class="header container__padding">
-        <nav class="nav">Тут будут другие кнопки</nav>
-    </header>
-    <!--Посты и прочее-->
-    <main class="main container__width container__padding">
-        <!--Поиск и создание нового поста-->
-        <section class="page-nav container__block-padding">
-            <h1 class="page-header">Бухич и настолки</h1>
-            <div class="page-nav_buttons">
-                <div class="search">
-                    <input type="text" class="search_input" placeholder="Найти пост">
-                    <a class="button button__search" href="#search">
-                        <div class="search_button-text">Поиск</div>
-                        <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.3779 18.6996L14.5681 12.8897C15.67 11.5293 16.3334 9.79975 16.3334 7.9167C16.3334 3.55145 12.7819 0 8.41666 0C4.05141 0 0.5 3.55145 0.5 7.9167C0.5 12.2819 4.05145 15.8334 8.4167 15.8334C10.2997 15.8334 12.0293 15.17 13.3897 14.0681L19.1996 19.878C19.3623 20.0407 19.6261 20.0407 19.7889 19.878L20.378 19.2888C20.5407 19.1261 20.5407 18.8623 20.3779 18.6996ZM8.4167 14.1667C4.97024 14.1667 2.16668 11.3631 2.16668 7.9167C2.16668 4.47024 4.97024 1.66668 8.4167 1.66668C11.8631 1.66668 14.6667 4.47024 14.6667 7.9167C14.6667 11.3631 11.8631 14.1667 8.4167 14.1667Z" fill="white"/>
-                        </svg>
-                    </a>
-                </div>
-                <a href="{% url 'post_new' %}" class="button button__new-post">Новый пост</a>
+<!--Шапка на будущее-->
+<header class="header container__padding">
+    <nav class="nav">Тут будут другие кнопки</nav>
+</header>
+<!--Посты и прочее-->
+<main class="main container__width container__padding">
+    <!--Поиск и создание нового поста-->
+    <section class="page-nav container__block-padding">
+        <h1 class="page-header">Бухич и настолки</h1>
+        <div class="page-nav_buttons">
+            <div class="search">
+                <input type="text" class="search_input" placeholder="Найти пост">
+                <a class="button button__search" href="#search">
+                    <div class="search_button-text">Поиск</div>
+                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20.3779 18.6996L14.5681 12.8897C15.67 11.5293 16.3334 9.79975 16.3334 7.9167C16.3334 3.55145 12.7819 0 8.41666 0C4.05141 0 0.5 3.55145 0.5 7.9167C0.5 12.2819 4.05145 15.8334 8.4167 15.8334C10.2997 15.8334 12.0293 15.17 13.3897 14.0681L19.1996 19.878C19.3623 20.0407 19.6261 20.0407 19.7889 19.878L20.378 19.2888C20.5407 19.1261 20.5407 18.8623 20.3779 18.6996ZM8.4167 14.1667C4.97024 14.1667 2.16668 11.3631 2.16668 7.9167C2.16668 4.47024 4.97024 1.66668 8.4167 1.66668C11.8631 1.66668 14.6667 4.47024 14.6667 7.9167C14.6667 11.3631 11.8631 14.1667 8.4167 14.1667Z"
+                              fill="white"/>
+                    </svg>
+                </a>
             </div>
-        </section>
+            <a href="{% url 'post_new' %}" class="button button__new-post">Новый пост</a>
+        </div>
+    </section>
     <!--Кнопки с Видимостью постов-->
-        <section class="view-post container__block-padding">
-            <a href="{% url 'post_list' %}" class="button button__publish">Опубликованные</a>
-            <a href="{% url 'post_status' %}" class="button button__publish">Не опубликованные</a>
-        </section>
-        <section class="categories container__block-padding" >
+    <section class="view-post container__block-padding">
+        <a href="{% url 'post_list' %}" class="button button__publish">Опубликованные</a>
+        <a href="{% url 'post_status' %}" class="button button__publish">Не опубликованные</a>
+    </section>
+    <section class="categories container__block-padding">
         <!--Вывод на главную страницу список всех категорий и делая из них сыллку на каждую категорию отдельно-->
-       <h2 class="container__block-padding">Категории</h2>
-            <div class="categories__button">
-                {%for i in category%}
-                    <a href="{% url 'categories' category_pk=i.pk %}" class="button button__publish container__block-padding"> {{ i }}</a>
-                {% endfor %}
-            </div>
-        </section>
-        {% for post in items %}
-        <!--Отображение поста-->
-        <section class="blog-post container__block-padding">
-            <!--Изображение-->
-            <img src="../../../source/img/Frame.png" alt="изображение" class="post-image">
-            <div class="post-content">
-                <!--Переменная с датой-->
-                    <div class="post-date">{{ post.created_date }}</div>
-                    <p class="post-hashtag">#хештег</p>
-                    <!--Заголовок, текст и кнопка перехода-->
-                    <h2 class="post-title">{{ post.title }}</h2>
-                    <p class="post-text">{{ post.text }}</p>
-                    <a href="{% url 'post_detail' post_pk=post.pk %}" class="button button_open-post">Смотреть полностью</a>
-            </div>
-        </section>
-        {% endfor %}
-    </main>
+        <h2 class="container__block-padding">Категории</h2>
+        <div class="categories__button">
+            {%for i in category%}
+            <a href="{% url 'categories' category_pk=i.pk %}" class="button button__publish container__block-padding">
+                {{ i }}</a>
+            {% endfor %}
+        </div>
+    </section>
+    {% for post in items %}
+    <!--Отображение поста-->
+    <section class="blog-post container__block-padding">
+        <!--Изображение-->
+        {% if post.image %}
+        <img src="{{ post.image.url }}" alt="image" class="post-image">
+        {% else  %}
+        <img src="" alt="image" class="post-image">
+        {% endif %}
+        <div class="post-content">
+            <!--Переменная с датой-->
+            <div class="post-date">{{ post.created_date }}</div>
+            <p class="post-hashtag">#хештег</p>
+            <!--Заголовок, текст и кнопка перехода-->
+            <h2 class="post-title">{{ post.title }}</h2>
+            <p class="post-text">{{ post.text }}</p>
+            <a href="{% url 'post_detail' post_pk=post.pk %}" class="button button_open-post">Смотреть полностью</a>
+        </div>
+    </section>
+    {% endfor %}
+</main>
 </body>
 </html>

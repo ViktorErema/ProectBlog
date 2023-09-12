@@ -7,7 +7,9 @@ class PostForm(forms.ModelForm):
             'title',
             'category',
             'text',
+            'image',
             'status_published_post',
+
 
         )
 

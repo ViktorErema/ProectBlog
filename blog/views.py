@@ -67,11 +67,12 @@ def post_new(request):
         form = PostForm
         return render(request, 'blog/post_new.html', {'form': form})
     else:
-        form = PostForm(request.POST)
+        form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save(commit=False)
             post.created_date = datetime.now()
             post.publish_date = datetime.now()
+
             post.save()
             return redirect('post_detail', post_pk=post.pk)
 
@@ -83,7 +84,7 @@ def post_edit(request, post_pk):
         form = PostForm(instance=post)
         return render(request, 'blog/post_edit.html', {'form': form})
     else:
-        form = PostForm(request.POST, instance=post )
+        form = PostForm(request.POST, request.FILES, instance=post)
         if form.is_valid():
             post = form.save(commit=False)
             post.created_date = datetime.now()

@@ -7,6 +7,7 @@ class Post(models.Model):
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
     status_published_post = models.BooleanField(default=False, verbose_name='Статус поста')
     category = models.ForeignKey('Category', verbose_name='Категория', blank=True, null=True, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='static/ProectBlog/img/', null=True, blank=True )
 
 
 
@@ -20,6 +21,7 @@ class Comments(models.Model):
     text = models.TextField(verbose_name='Текст')
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
+
 
 
 
