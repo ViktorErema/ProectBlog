@@ -173,7 +173,7 @@
     <main class="main container__width container__padding">
         <!--Поиск и создание нового поста-->
         <section class="page-nav container__block-padding">
-            <h1 class="page-header">Teach my skills</h1>
+            <h1 class="page-header">Бухич и настолки</h1>
             <div class="page-nav_buttons">
                 <div class="search">
                     <input type="text" class="search_input" placeholder="Найти пост">
@@ -187,6 +187,13 @@
                 <a href="{% url 'post_new' %}" class="button button__new-post">Новый пост</a>
             </div>
         </section>
+    </div>
+         <!--Вывод на главную страницу список всех категорий и делая из них сыллку на каждую категорию отдельно-->
+        <h2>Категории</h2>
+                    {%for i in category%}
+                          <br> <a href="{% url 'categories' category_pk=i.pk %}"> {{ i }}</a> </br>
+                    {% endfor %}
+    </div>
     <!--Кнопки с Видимостью постов-->
         <section class="view-post container__block-padding">
             <a href="{% url 'post_list' %}" class="button button__publish">Опубликованные</a>

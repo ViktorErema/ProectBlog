@@ -1,5 +1,5 @@
 from django import forms
-from blog.models import Post
+from blog.models import Post, Category
 
 class PostForm(forms.ModelForm):
     class Meta:
@@ -7,5 +7,5 @@ class PostForm(forms.ModelForm):
         fields = (
             'title',
             'text',
-            'status_published_post'
+            'status_published_post',
         )
