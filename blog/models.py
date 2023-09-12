@@ -6,7 +6,8 @@ class Post(models.Model):
     created_date = models.DateTimeField(verbose_name='Дата создания', auto_now_add=True, )
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
     status_published_post = models.BooleanField(default=False, verbose_name='Статус поста')
-    сategory = models.CharField(max_length=100, verbose_name='Категория')
+    category = models.ForeignKey('Category', verbose_name='Категория', blank=True, null=True, on_delete=models.CASCADE)
+
 
 
     def __str__(self):
@@ -21,6 +22,13 @@ class Comments(models.Model):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
 
+
+    def __str__(self):
+        return f'{self.text}'
+
+
+class Category(models.Model):
+    text = models.CharField(max_length=100, verbose_name='Категория')
 
     def __str__(self):
         return f'{self.text}'

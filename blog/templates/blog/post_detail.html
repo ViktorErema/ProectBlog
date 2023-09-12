@@ -15,9 +15,14 @@
 </style>
 <!--    {{ items }}-->
     <div style="text-align: center; margin-top: 40px; margin-bottom: 40px ">
-        <a style="font-size: 45px; color: #1b1b1b" href="{% url 'post_list' %}"> Teach my skills </a>
+        <a style="font-size: 45px; color: #1b1b1b" href="{% url 'post_list' %}"> Бухич и настолки </a>
 
     </div>
+    <div style="text-align: center; margin-top: 40px; margin-bottom: 40px ">
+        <a style="font-size: 25px; color: #681b1b" > {{ post.category }} </a>
+
+    </div>
+
     <div style="text-align: left;  ">
         <a style="font-size: 20px; margin: 5px; color: #580000; border: 1px solid; border-radius: 25px; padding: 5px "
            href="{% url 'post_list' %}"> Вернуться назад
@@ -50,7 +55,8 @@
 
         </div>
     </div>
-<br style="margin-top: 25px; text-align: left" >
+    </div>
+        <br style="margin-top: 25px; text-align: left" >
         <h2>Комментарии : {{ kol_comments }} </h2>
 
         {%for i in comments%}
@@ -59,7 +65,7 @@
             {{ i }}
            </br>
         {% endfor %}
-</div>
+    </div>
 
 
 </body>

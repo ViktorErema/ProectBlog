@@ -2,13 +2,25 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from blog.models import Post, Comments
+from blog.models import Post, Comments, Category
 from blog.forms import PostForm
 
 def post_list(request):
     posts = Post.objects.all().filter(status_published_post=True)
-    context = {'items': posts}
+    category = Category.objects.all()
+    context = {'items': posts,
+               'category': category
+               }
     return render(request, 'blog/post_list.html', context)
+
+def categories(request, category_pk):
+    posts = Post.objects.filter(category=category_pk)
+    category = Category.objects.all()
+    context = {'items': posts,
+               'category': category
+               }
+    return render(request, 'blog/post_list.html', context)
+
 
 def post_status(request):
     #Функция отвечающая за добавление поста в режим "неопубликованные"
