@@ -111,6 +111,23 @@
             align-items: center;
             justify-content: center;
         }
+        .categories {
+            width: 100%;
+            display: flex;
+            flex-flow: column nowrap;
+            align-items: center;
+            justify-content: center;
+        }
+        .categories__button {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: flex-start;
+            justify-content: flex-start;
+        }
+        .categories__button a:not(:last-child){
+            margin-right: 20px;
+        }
         .button__publish {
             background-color: #6A7577;
         }
@@ -187,17 +204,19 @@
                 <a href="{% url 'post_new' %}" class="button button__new-post">Новый пост</a>
             </div>
         </section>
-    </div>
-         <!--Вывод на главную страницу список всех категорий и делая из них сыллку на каждую категорию отдельно-->
-        <h2>Категории</h2>
-                    {%for i in category%}
-                          <br> <a href="{% url 'categories' category_pk=i.pk %}"> {{ i }}</a> </br>
-                    {% endfor %}
-    </div>
     <!--Кнопки с Видимостью постов-->
         <section class="view-post container__block-padding">
             <a href="{% url 'post_list' %}" class="button button__publish">Опубликованные</a>
             <a href="{% url 'post_status' %}" class="button button__publish">Не опубликованные</a>
+        </section>
+        <section class="categories container__block-padding" >
+        <!--Вывод на главную страницу список всех категорий и делая из них сыллку на каждую категорию отдельно-->
+       <h2 class="container__block-padding">Категории</h2>
+            <div class="categories__button">
+                {%for i in category%}
+                    <a href="{% url 'categories' category_pk=i.pk %}" class="button button__publish container__block-padding"> {{ i }}</a>
+                {% endfor %}
+            </div>
         </section>
         {% for post in items %}
         <!--Отображение поста-->
