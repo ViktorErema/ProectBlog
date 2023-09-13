@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+</head>
+<body>
+
+  {% for i in fb %}
+     {{ i.author }}<br>
+     {{ i.text }}<br>
+     {{ i.date }}<br>
+    {% endfor %}
+
+
+</body>
+</html>

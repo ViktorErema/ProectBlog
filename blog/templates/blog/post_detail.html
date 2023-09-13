@@ -40,6 +40,13 @@
         <a style="font-size: 20px; margin: 20px; margin-right: 20px; color: #580000; border: 1px solid; border-radius: 35px; padding: 5px "
            href="{% url 'post_delete' post_pk=post.pk %}"> Удалить
         </a>
+    <button>
+        <a  href="{% url 'feedback' post_pk=post.pk %}">
+            <p>
+                Оставить отзыв
+            </p>
+        </a>
+    </button>
     </div>
 
     <div style="">
@@ -70,11 +77,11 @@
     </form>
     <div>
         {%for i in comments%}
-            {{ i.author }}
-            {{ i.publish_date }}
-            {{ i }}
+           <h3> {{ i.author }}<br></h3>
+            {{ i.publish_date }}<br>
+            {{ i }}<br>
            {% if user.id == i.author.id %}
-                     {% endif %}
+           {% endif %}
 
 
         {% endfor %}

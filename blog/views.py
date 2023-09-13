@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
-from blog.models import Post, Comments, Category
+from blog.models import Post, Comments, Category, Feedback
 from blog.forms import PostForm, CommentForm
 
 def post_list(request):
@@ -92,7 +92,17 @@ def post_edit(request, post_pk):
             post.save()
             return redirect('post_detail', post_pk=post.pk)
 
-
 def post_delete(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk).delete()
     return redirect('post_list')
+
+
+def feedback(request, post_pk):
+
+    post = Post.objects.get(pk=post_pk)
+    fb = Feedback.objects.filter(post=post_pk)
+    context = {
+        "post": post,
+        "fd": fb,
+    }
+    return render(request, 'blog/feedback.html', context)

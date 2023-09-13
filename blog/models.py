@@ -10,7 +10,6 @@ class Post(models.Model):
     image = models.ImageField(upload_to='static/ProectBlog/img/', null=True, blank=True )
 
 
-
     def __str__(self):
         return f'{self.title}'
 
@@ -22,15 +21,21 @@ class Comments(models.Model):
     publish_date = models.DateTimeField(verbose_name='Дата публикации', auto_now_add=True)
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE)
 
-
-
-
     def __str__(self):
         return f'{self.text}'
 
 
 class Category(models.Model):
     text = models.CharField(max_length=100, verbose_name='Категория')
+
+    def __str__(self):
+        return f'{self.text}'
+
+class Feedback(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    author = models.ForeignKey("auth.User", on_delete=models.CASCADE, verbose_name='Автор')
+    text = models.TextField(verbose_name='Текст отзыва')
+    date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f'{self.text}'
