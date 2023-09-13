@@ -2,18 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Post list</title>
+    <meta name="viewport" content="device-width, initial-scale=1">
+    <title>{{ post.title }}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{%static 'ProectBlog/project/style.css'%}">
 </head>
-<body>
-<style>
-    a {
-      text-decoration: none;
-    }
-    a :hover {
-        font-size: 25px;
-    }
-</style>
-<!--    {{ items }}-->
+<body class="blog blog_fonts">
+    <header class="header container__padding">
+        <nav class="nav">Тут будут другие кнопки</nav>
+    </header>
+    <main class="main container__width container__padding">
+        <section class="page-nav container__block-padding ">
+            <div class="page-nav_buttons">
+                <a class="button button__publish" href="{% url 'post_list' %}"> 
+                    Вернуться назад
+                </a>
+                <a class="button button__publish" href="{% url 'post_edit' post_pk=post.pk %}"> 
+                    Редактирование
+                </a>
+                {% if post.status_published_post == False %}
+                <a class="button button__publish" href="{% url 'published_post' post_pk=post.pk %}">
+                     Опубликовать
+                </a>
+                {% endif %}
+                <a class="button button__publish" href="{% url 'post_delete' post_pk=post.pk %}">
+                     Удалить
+                </a>
+                <a  class="button button__publish" href="{% url 'feedback' post_pk=post.pk %}">
+                    Оставить отзыв
+            </a>
+            </div>
+            <a class="page-header" href="{% url 'post_list' %}"> 
+                Бухич и настолки 
+            </a>
+        </section>
+        <section class="post-header container__block-padding">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="post-info">
+                <div class="post-date">{{ post.created_date }}</div>
+                <p class="post-hashtag">{{ post.category }}</p>
+            </div>
+        </section>
+        <section class="post-content post-content_detail post-content_padding container__block-padding">{{ post.text }}</section>
+        <section class="comments container__block-padding">
+            <h3 class="comments-title">Комментарии : {{ kol_comments }} </h3>
+            <form class="comment-form container__block-padding" action="" method="POST">{% csrf_token %}
+                {{ comment_form.as_p }}
+                <input type="submit" value="Create" class="button button__search" >
+            </form>
+            <div class="comment-list">
+                    {%for i in comments%}
+                    <div class="comment comment_margin">
+                        <div class="comment__header">
+                            <h4 class="comment-title"> {{ i.author }}</h4>
+                            <p class="comment-date">{{ i.publish_date }}</p>
+                        </div>
+                        <p class="comment__text">{{ i }}</p>
+                        {% if user.id == i.author.id %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+<!--    {{ items }}
     <div style="text-align: center; margin-top: 40px; margin-bottom: 40px ">
         <a style="font-size: 45px; color: #1b1b1b" href="{% url 'post_list' %}"> Бухич и настолки </a>
 
@@ -42,9 +94,7 @@
         </a>
     <button>
         <a  href="{% url 'feedback' post_pk=post.pk %}">
-            <p>
                 Оставить отзыв
-            </p>
         </a>
     </button>
     </div>
@@ -87,6 +137,6 @@
         {% endfor %}
     </div>
 
-
+-->
 </body>
 </html>

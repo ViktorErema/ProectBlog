@@ -51,6 +51,9 @@
 .page-header {
     font-weight: 400;
     font-size: 54px;
+    color: #ffffff;
+    outline: none;
+    text-decoration: none;
 }
 .page-nav_buttons {
     display: flex;
@@ -151,7 +154,6 @@
     width: 600px;
     height: 440px;
     background-color: black;
-    margin: 0;
 }
 .post-date {
     background-color: #191919;
@@ -171,4 +173,70 @@
 .post-text {
     max-height: 130px;
     overflow: hidden;
+}
+.post-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.post-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.post-content_detail {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+.post-content_padding {
+    padding: 20px 40px;
+} 
+.comments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.comment-form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.comment {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.349);
+    padding: 10px 20px;
+    border-radius: 10px;
+    color: #ffffffcc;
+}
+.comment-title {
+    color:#ffffff;
+}
+.comment_margin {
+    margin-bottom: 20px;
+}
+.comment__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    
+    padding-bottom: 10px;
+}
+.comment__header * {
+    padding-left: 10px;
+}
+.comment-date {
+    font-size: 16px;
+    color: #ffffff83;
 }
