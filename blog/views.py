@@ -4,6 +4,22 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, JsonResponse
 from blog.models import Post, Comments, Category, Feedback
 from blog.forms import PostForm, CommentForm
+from django.db.models import Avg
+
+def raiting(post_pk):
+    '''
+    рейтинг отзыва на посты
+    '''
+    fb = Feedback.objects.filter(post=post_pk)
+    count = sum([i.raiting for i in fb]) / fb.count()  # Делит общию оценку рейтинга на общее количество
+    return round(count, 1) #Ограничение на количество отзывов
+
+
+def post_raiting(request):
+    '''
+    Фильтрация постов по рейтингу на главной странице
+    '''
+
 
 def post_list(request):
     posts = Post.objects.all().filter(status_published_post=True)
@@ -43,6 +59,7 @@ def post_detail(request, post_pk):
     post = Post.objects.get(pk=post_pk)
     comments = Comments.objects.filter(post=post_pk)
     kol_comments = comments.count()
+    raiting_count = raiting(post_pk)
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
@@ -56,10 +73,11 @@ def post_detail(request, post_pk):
         comment_form = CommentForm()
 
     return render(request, 'blog/post_detail.html', {
-                                                    'post': post,
-                                                     'comments': comments,
-                                                     'kol_comments': kol_comments,
-                                                     'comment_form': comment_form
+                                                     'post'         : post,
+                                                     'comments'     : comments,
+                                                     'kol_comments' : kol_comments,
+                                                     'comment_form' : comment_form,
+                                                     'raiting': raiting_count
                                                                         })
 
 def post_new(request):
@@ -98,11 +116,20 @@ def post_delete(request, post_pk):
 
 
 def feedback(request, post_pk):
-
+    '''
+    Функция для вызова отзывов
+    '''
     post = Post.objects.get(pk=post_pk)
     fb = Feedback.objects.filter(post=post_pk)
+
+
     context = {
+        "fb": fb,
         "post": post,
-        "fd": fb,
+
     }
     return render(request, 'blog/feedback.html', context)
+
+
+
+

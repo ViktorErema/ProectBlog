@@ -36,6 +36,7 @@ class Feedback(models.Model):
     author = models.ForeignKey("auth.User", on_delete=models.CASCADE, verbose_name='Автор')
     text = models.TextField(verbose_name='Текст отзыва')
     date = models.DateTimeField(auto_now_add=True)
+    raiting = models.FloatField(verbose_name='Рейтинг', default=3)
 
     def __str__(self):
         return f'{self.text}'
