@@ -19,6 +19,10 @@ def post_raiting(request):
     '''
     Фильтрация постов по рейтингу на главной странице
     '''
+    posts = Post.objects.values('title', 'pk').annotate(Avg('feedbacks__raiting')).order_by('feedbacks__railing__avg')
+    return render(request, 'blog/post_list.html', {
+                                                                        'items': posts,
+                                                                        })
 
 
 def post_list(request):
