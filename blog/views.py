@@ -26,8 +26,15 @@ def post_raiting(request):
 
 
 def post_list(request):
-    posts = Post.objects.all().filter(status_published_post=True)
+    search_query = request.GET.get('search', '')
+    if search_query:
+        posts = Post.objects.filter(title__icontains=search_query)
+    else:
+        posts = Post.objects.all().filter(status_published_post=True)
+
+
     category = Category.objects.all()
+
     context = {'items': posts,
                'category': category
                }
